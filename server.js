@@ -21,8 +21,8 @@ var server = express();
 server.set('state namespace', 'App');
 server.use('/public', express.static(path.join(__dirname, '/build')));
 
-server.use((req, res, next) => {
-    let context = app.createContext();
+server.use(function(req, res, next) {
+    var context = app.createContext();
 
     debug('Executing navigate action');
     context.getActionContext().executeAction(navigateAction, {
@@ -38,10 +38,10 @@ server.use((req, res, next) => {
         }
 
         debug('Exposing context state');
-        const exposed = 'window.App=' + serialize(app.dehydrate(context)) + ';';
+        var exposed = 'window.App=' + serialize(app.dehydrate(context)) + ';';
 
         debug('Rendering Application component into html');
-        const html = React.renderToStaticMarkup(htmlComponent({
+        var html = React.renderToStaticMarkup(htmlComponent({
             context: context.getComponentContext(),
             state: exposed,
             markup: React.renderToString(context.createElement())

@@ -22,7 +22,7 @@ var Application = React.createClass({
     },
 
     componentDidUpdate: function(prevProps, prevState) {
-        const newProps = this.props;
+        var newProps = this.props;
         if (newProps.pageTitle === prevProps.pageTitle) {
             return;
         }

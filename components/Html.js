@@ -2,7 +2,7 @@ var React = require('react');
 var ApplicationStore = require('../stores/ApplicationStore');
 
 var Html = React.createClass({
-    render() {
+    render: function() {
         return (
             <html>
             <head>
