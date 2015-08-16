@@ -2,11 +2,9 @@
 
 var React = require('react');
 var Nav = require('./Nav');
-var Home = require('./Home');
-var About = require('./About');
 var ApplicationStore = require('../stores/ApplicationStore');
-var provideContext = require('fluxible/addons/provideContext');
-var connectToStores = require('fluxible/addons/connectToStores');
+var connectToStores = require("fluxible-addons-react").connectToStores;
+var provideContext = require('fluxible-addons-react').provideContext;
 var handleHistory = require('fluxible-router').handleHistory;
 
 var Application = React.createClass({
@@ -33,8 +31,8 @@ var Application = React.createClass({
 module.exports = handleHistory(provideContext(connectToStores(
     Application,
     [ApplicationStore],
-    function (stores, props) {
-        var appStore = stores.ApplicationStore;
+    function (context, props) {
+        var appStore = context.getStore(ApplicationStore);
         return {
             currentPageName: appStore.getCurrentPageName(),
             pageTitle: appStore.getPageTitle(),

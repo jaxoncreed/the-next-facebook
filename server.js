@@ -6,6 +6,7 @@
  */
 
 var express = require('express');
+var compression = require('compression');
 var path = require('path');
 var serialize = require('serialize-javascript');
 var {navigateAction} = require('fluxible-router');
@@ -13,13 +14,15 @@ var debugLib = require('debug');
 var React = require('react');
 var app = require('./app');
 var HtmlComponent = require('./components/Html');
+var { createElementWithContext } = require('fluxible-addons-react');
 var htmlComponent = React.createFactory(HtmlComponent);
+var env = process.env.NODE_ENV;
 
 var debug = debugLib('fluxible-template');
 
 var server = express();
-server.set('state namespace', 'App');
 server.use('/public', express.static(path.join(__dirname, '/build')));
+server.use(compression());
 
 server.use(function(req, res, next) {
     var context = app.createContext();
@@ -27,7 +30,7 @@ server.use(function(req, res, next) {
     debug('Executing navigate action');
     context.getActionContext().executeAction(navigateAction, {
         url: req.url
-    }, (err) => {
+    }, function(err) {
         if (err) {
             if (err.statusCode && err.statusCode === 404) {
                 next();
@@ -42,9 +45,10 @@ server.use(function(req, res, next) {
 
         debug('Rendering Application component into html');
         var html = React.renderToStaticMarkup(htmlComponent({
+            clientFile: env === 'production' ? 'main.min.js' : 'main.js',
             context: context.getComponentContext(),
             state: exposed,
-            markup: React.renderToString(context.createElement())
+            markup: React.renderToString(createElementWithContext(context))
         }));
 
         debug('Sending markup');
@@ -56,6 +60,6 @@ server.use(function(req, res, next) {
 
 var port = process.env.PORT || 3000;
 server.listen(port);
-console.log('Listening on port ' + port);
+console.log('Application listening on port ' + port);
 
 module.exports = server;

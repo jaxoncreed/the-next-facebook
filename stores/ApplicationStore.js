@@ -3,22 +3,23 @@ var routesConfig = require('../configs/routes');
 var RouteStore = require('./RouteStore');
 
 var ApplicationStore = createStore({
-    storeName: "ApplicationStore",
+    storeName: 'ApplicationStore',
     handlers: {
-        'NAVIGATE_SUCCESS': 'handleRouteUpdate'
+        'NAVIGATE_SUCCESS': 'handlePageTitle'
     },
     initialize: function (dispatcher) {
+        this.currentPageName = null;
+        this.currentPage = null;
         this.pages = routesConfig;
         this.pageTitle = '';
     },
-    handleRouteUpdate: function(currentRoute) {
-        var self = this;
-        this.dispatcher.waitFor(RouteStore, function () {
+    handlePageTitle: function(currentRoute) {
+        this.dispatcher.waitFor(RouteStore, function() {
             if (currentRoute && currentRoute.get('title')) {
-                self.pageTitle = currentRoute.get('title');
-                self.emitChange();
+                this.pageTitle = currentRoute.get('title');
+                this.emitChange();
             }
-        });
+        }.bind(this));
     },
     getCurrentPageName: function() {
         return this.currentPageName;
@@ -34,7 +35,7 @@ var ApplicationStore = createStore({
             currentPageName: this.currentPageName,
             currentPage: this.currentPage,
             pages: this.pages,
-            pageTitle: this.pageTitle,
+            pageTitle: this.pageTitle
         };
     },
     rehydrate: function(state) {

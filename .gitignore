@@ -1,4 +1,4 @@
-build
+public/js
 node_modules
 
 # Logs and databases #

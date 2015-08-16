@@ -1,18 +1,19 @@
-'use strict';
 var React = require('react');
 var NavLink = require('fluxible-router').NavLink;
 
 var Nav = React.createClass({
-    defaultProps: {
-        selected: 'home',
-        links: {} 
+    getDefaultProps: function() {
+        return {
+            selected: 'home',
+            links: {}
+        }
     },
 
     render: function() {
         var selected = this.props.selected;
         var links = this.props.links;
 
-        var linkHTML = Object.keys(links).map(function (name) {
+        var linkHTML = Object.keys(links).map(function(name) {
             var className = '';
             var link = links[name];
 
