@@ -1,7 +1,6 @@
 /*globals document*/
 
 var React = require('react');
-var Nav = require('./Nav');
 var ApplicationStore = require('../stores/ApplicationStore');
 var connectToStores = require("fluxible-addons-react").connectToStores;
 var provideContext = require('fluxible-addons-react').provideContext;
@@ -13,7 +12,6 @@ var Application = React.createClass({
 
         return (
             <div>
-                <Nav selected={this.props.currentPageName} links={this.props.pages} />
                 <Handler />
             </div>
         );
