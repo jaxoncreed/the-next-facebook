@@ -12,6 +12,7 @@ var Application = React.createClass({
 
         return (
             <div>
+                <h1>Welcome to The Next Facebook!</h1>  
                 <Handler />
             </div>
         );
