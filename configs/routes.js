@@ -11,6 +11,7 @@ module.exports = {
         method: 'get',  
         page: 'feed',  
         title: 'Your Feed',  
-        handler: require('../components/Feed')  
+        handler: require('../components/Feed'),
+        action: require('../actions/getPosts')
     }  
 };
