@@ -1,6 +1,6 @@
 var React = require('react');  
 var NavLink = require('fluxible-router').NavLink;  
-var connectToStores = require('fluxible/addons/connectToStores');  
+var connectToStores = require("fluxible-addons-react").connectToStores;
 var UserStore = require('../stores/UserStore');
 
 var NavBar = React.createClass({  

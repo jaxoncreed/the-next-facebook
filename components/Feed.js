@@ -1,5 +1,5 @@
 var React = require('react');  
-var connectToStores = require('fluxible/addons/connectToStores');  
+var connectToStores = require("fluxible-addons-react").connectToStores; 
 var FeedStore = require('../stores/FeedStore');  
 
 var Feed = React.createClass({  
