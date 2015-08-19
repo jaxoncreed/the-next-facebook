@@ -21,7 +21,7 @@
     "fluxible": "^0.5.0",
     "fluxible-addons-react": "^0.1.6",
     "fluxible-app": "^0.1.5",
-    "fluxible-plugin-fetchr": "^0.3.0",
+    "fluxible-plugin-fetchr": "^0.3.6",
     "fluxible-router": "^0.2.0",
     "react": "^0.13.0",
     "serialize-javascript": "^1.0.0",

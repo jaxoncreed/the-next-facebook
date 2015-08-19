@@ -6,10 +6,17 @@ var RouteStore = require('./stores/RouteStore');
 var UserStore = require('./stores/UserStore');
 var FeedStore = require('./stores/FeedStore');
 
+var fetchr = require('fluxible-plugin-fetchr');
+var fetchrInstance = fetchr({
+    xhrPath: '/api'
+});
+
 // create new fluxible instance  
 var app = new Fluxible({  
     component: Application  
 });
+
+app.plug(fetchrInstance);
 
 // register stores  
 app.registerStore(RouteStore);  
